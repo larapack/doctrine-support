@@ -12,6 +12,17 @@ use Larapack\DoctrineSupport\Connections\MySqlConnection;
 class DoctrineSupportServiceProvider extends ServiceProvider
 {
     /**
+     * Connections and its types to attach to it.
+     *
+     * @var array
+     */
+    protected $types = [
+        'mysql' => [
+            'enum' => EnumType::class,
+        ],
+    ];
+
+    /**
      * Register the application services.
      */
     public function register()
@@ -19,6 +30,9 @@ class DoctrineSupportServiceProvider extends ServiceProvider
         $this->registerMySqlDatabaseConnection();
     }
 
+    /**
+     * Register MySQL database connection
+     */
     protected function registerMySqlDatabaseConnection()
     {
         $this->app->singleton('db.connection.mysql', function ($app, $parameters) {
@@ -40,7 +54,7 @@ class DoctrineSupportServiceProvider extends ServiceProvider
     }
 
     /**
-     * Add Doctrine types for better support.
+     * Add Doctrine types for the connection.
      *
      * @param Connection $connection
      */
@@ -48,7 +62,7 @@ class DoctrineSupportServiceProvider extends ServiceProvider
     {
         $name = $connection->getName();
 
-        foreach (array_get($this->doctrineTypes, $name, []) as $type => $handler) {
+        foreach (array_get($this->types, $name, []) as $type => $handler) {
             if (! Type::hasType($type)) {
                 Type::addType($type, $handler);
             }
@@ -58,10 +72,4 @@ class DoctrineSupportServiceProvider extends ServiceProvider
                 ->registerDoctrineTypeMapping($type, $type);
         }
     }
-
-    protected $doctrineTypes = [
-        'mysql' => [
-            'enum' => EnumType::class,
-        ],
-    ];
 }

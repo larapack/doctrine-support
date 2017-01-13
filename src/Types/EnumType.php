@@ -9,6 +9,9 @@ class EnumType extends Type
 {
     const ENUM = 'enum';
 
+    /**
+     * @inheritdoc
+     */
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
         $options = array_get($fieldDeclaration, 'options', []);
@@ -17,6 +20,9 @@ class EnumType extends Type
         return "ENUM({$optionsString})";
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getName()
     {
         return static::ENUM;

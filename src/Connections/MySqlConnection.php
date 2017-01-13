@@ -8,9 +8,7 @@ use Larapack\DoctrineSupport\Drivers\MySqlDriver;
 class MySqlConnection extends IlluminateMySqlConnection
 {
     /**
-     * Get the Doctrine DBAL driver.
-     *
-     * @return \Doctrine\DBAL\Driver\PDOMySql\Driver
+     * @inheritdoc
      */
     protected function getDoctrineDriver()
     {

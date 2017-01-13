@@ -8,6 +8,13 @@ use Doctrine\DBAL\Schema\MySqlSchemaManager as DoctrineMySqlSchemaManager;
 
 class MySqlSchemaManager extends DoctrineMySqlSchemaManager
 {
+    /**
+     * Gets Table Column Definition for Enum Column Type.
+     *
+     * @param array $tableColumn
+     *
+     * @return \Doctrine\DBAL\Schema\Column
+     */
     protected function getPortableTableEnumColumnDefinition(array $tableColumn)
     {
         $tableColumn = array_change_key_case($tableColumn, CASE_LOWER);
@@ -48,6 +55,9 @@ class MySqlSchemaManager extends DoctrineMySqlSchemaManager
         return $column;
     }
 
+    /**
+     * @inheritdoc
+     */
     protected function _getPortableTableColumnDefinition($tableColumn)
     {
         $keys = array_change_key_case($tableColumn, CASE_LOWER);
@@ -64,6 +74,12 @@ class MySqlSchemaManager extends DoctrineMySqlSchemaManager
         return parent::_getPortableTableColumnDefinition($tableColumn);
     }
 
+    /**
+     * Get enum options from the column.
+     *
+     * @param $tableColumn
+     * @return array
+     */
     protected function getEnumOptions($tableColumn)
     {
         $type = $tableColumn['type'];
