@@ -4,10 +4,10 @@ namespace Larapack\DoctrineSupport;
 
 use Doctrine\DBAL\Types\Type;
 use Illuminate\Database\Connection;
-use Illuminate\Support\ServiceProvider;
-use Larapack\DoctrineSupport\Types\EnumType;
 use Illuminate\Database\Schema\Grammars\MySqlGrammar;
+use Illuminate\Support\ServiceProvider;
 use Larapack\DoctrineSupport\Connections\MySqlConnection;
+use Larapack\DoctrineSupport\Types\EnumType;
 
 class DoctrineSupportServiceProvider extends ServiceProvider
 {
@@ -31,7 +31,7 @@ class DoctrineSupportServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register MySQL database connection
+     * Register MySQL database connection.
      */
     protected function registerMySqlDatabaseConnection()
     {
@@ -47,7 +47,7 @@ class DoctrineSupportServiceProvider extends ServiceProvider
             // Add Doctrine types for better support
             $this->addDoctrineTypes($connection);
 
-            $connection->setSchemaGrammar(new MySqlGrammar);
+            $connection->setSchemaGrammar(new MySqlGrammar());
 
             return $connection;
         });
@@ -63,7 +63,7 @@ class DoctrineSupportServiceProvider extends ServiceProvider
         $name = $connection->getName();
 
         foreach (array_get($this->types, $name, []) as $type => $handler) {
-            if (! Type::hasType($type)) {
+            if (!Type::hasType($type)) {
                 Type::addType($type, $handler);
             }
 

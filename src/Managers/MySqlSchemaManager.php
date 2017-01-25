@@ -2,9 +2,9 @@
 
 namespace Larapack\DoctrineSupport\Managers;
 
+use Doctrine\DBAL\Schema\MySqlSchemaManager as DoctrineMySqlSchemaManager;
 use Doctrine\DBAL\Types\Type;
 use Larapack\DoctrineSupport\Column;
-use Doctrine\DBAL\Schema\MySqlSchemaManager as DoctrineMySqlSchemaManager;
 
 class MySqlSchemaManager extends DoctrineMySqlSchemaManager
 {
@@ -30,7 +30,7 @@ class MySqlSchemaManager extends DoctrineMySqlSchemaManager
             $tableColumn['comment'] = $this->removeDoctrineTypeFromComment($tableColumn['comment'], $type);
         }
 
-        $options = array(
+        $options = [
             'length'        => null,
             'unsigned'      => false,
             'fixed'         => null,
@@ -42,7 +42,7 @@ class MySqlSchemaManager extends DoctrineMySqlSchemaManager
             'comment'       => isset($tableColumn['comment']) && $tableColumn['comment'] !== ''
                 ? $tableColumn['comment']
                 : null,
-        );
+        ];
 
         $column = new Column($tableColumn['field'], Type::getType($type), $options);
 
@@ -56,7 +56,7 @@ class MySqlSchemaManager extends DoctrineMySqlSchemaManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _getPortableTableColumnDefinition($tableColumn)
     {
@@ -78,6 +78,7 @@ class MySqlSchemaManager extends DoctrineMySqlSchemaManager
      * Get enum options from the column.
      *
      * @param $tableColumn
+     *
      * @return array
      */
     protected function getEnumOptions($tableColumn)
