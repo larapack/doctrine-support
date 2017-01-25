@@ -9,7 +9,7 @@ use Larapack\DoctrineSupport\Managers\MySqlSchemaManager;
 class MySqlDriver extends Driver
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getSchemaManager(Connection $conn)
     {

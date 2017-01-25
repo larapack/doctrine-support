@@ -8,10 +8,10 @@ use Larapack\DoctrineSupport\Drivers\MySqlDriver;
 class MySqlConnection extends IlluminateMySqlConnection
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function getDoctrineDriver()
     {
-        return new MySqlDriver;
+        return new MySqlDriver();
     }
 }

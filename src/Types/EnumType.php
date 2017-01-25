@@ -2,15 +2,15 @@
 
 namespace Larapack\DoctrineSupport\Types;
 
-use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Types\Type;
 
 class EnumType extends Type
 {
     const ENUM = 'enum';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
@@ -21,7 +21,7 @@ class EnumType extends Type
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getName()
     {
