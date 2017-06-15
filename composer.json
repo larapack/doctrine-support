@@ -15,13 +15,12 @@
     }
   ],
   "require": {
-    "illuminate/support": "5.3.*|5.4.*",
+    "illuminate/support": "5.3.*|5.4.*|5.5.x-dev",
     "doctrine/dbal": "^2.5"
   },
   "autoload": {
     "psr-4": {
       "Larapack\\DoctrineSupport\\": "src/"
     }
-  },
-  "minimum-stability": "stable"
+  }
 }
