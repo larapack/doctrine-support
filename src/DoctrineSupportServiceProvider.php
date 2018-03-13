@@ -44,7 +44,7 @@ class DoctrineSupportServiceProvider extends ServiceProvider
      */
     protected function addDoctrineTypes(Connection $connection)
     {
-        $name = $connection->getName();
+        $name = $connection->getDriverName();
 
         foreach (array_get($this->types, $name, []) as $type => $handler) {
             if (!Type::hasType($type)) {
