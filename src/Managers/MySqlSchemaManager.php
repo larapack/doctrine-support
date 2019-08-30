@@ -86,7 +86,7 @@ class MySqlSchemaManager extends DoctrineMySqlSchemaManager
     {
         $type = $tableColumn['type'];
 
-        if (starts_with($type, 'enum(') && ends_with($type, ')')) {
+        if (Str::startsWith($type, 'enum(') && ends_with($type, ')')) {
             return explode("','", trim(substr($type, strlen('enum('), -1), "'"));
         }
 
