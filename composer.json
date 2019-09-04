@@ -22,5 +22,12 @@
     "psr-4": {
       "Larapack\\DoctrineSupport\\": "src/"
     }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Larapack\\DoctrineSupport\\DoctrineSupportServiceProvider"
+      ]
+    }
   }
 }
