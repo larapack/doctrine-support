@@ -4,6 +4,7 @@ namespace Larapack\DoctrineSupport\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
+use Illuminate\Support\Arr;
 
 class EnumType extends Type
 {
@@ -14,7 +15,7 @@ class EnumType extends Type
      */
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
-        $options = array_get($fieldDeclaration, 'options', []);
+        $options = Arr::get($fieldDeclaration, 'options', []);
         $optionsString = count($options) ? "'".implode("','", $options)."'" : "''";
 
         return "ENUM({$optionsString})";

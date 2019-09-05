@@ -4,6 +4,7 @@ namespace Larapack\DoctrineSupport\Managers;
 
 use Doctrine\DBAL\Schema\MySqlSchemaManager as DoctrineMySqlSchemaManager;
 use Doctrine\DBAL\Types\Type;
+use Illuminate\Support\Str;
 use Larapack\DoctrineSupport\Column;
 
 class MySqlSchemaManager extends DoctrineMySqlSchemaManager
@@ -65,7 +66,7 @@ class MySqlSchemaManager extends DoctrineMySqlSchemaManager
         $type = strtolower($keys['type']);
         $type = strtok($type, '(), ');
 
-        $method = camel_case("get_portable_table_{$type}_column_definition");
+        $method = Str::camel("get_portable_table_{$type}_column_definition");
 
         if (method_exists($this, $method)) {
             return $this->$method($tableColumn);
@@ -85,7 +86,7 @@ class MySqlSchemaManager extends DoctrineMySqlSchemaManager
     {
         $type = $tableColumn['type'];
 
-        if (starts_with($type, 'enum(') && ends_with($type, ')')) {
+        if (Str::startsWith($type, 'enum(') && Str::endsWith($type, ')')) {
             return explode("','", trim(substr($type, strlen('enum('), -1), "'"));
         }
 

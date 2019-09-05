@@ -4,6 +4,7 @@ namespace Larapack\DoctrineSupport;
 
 use Doctrine\DBAL\Types\Type;
 use Illuminate\Database\Connection;
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 use Larapack\DoctrineSupport\Connections\MySqlConnection;
 use Larapack\DoctrineSupport\Types\EnumType;
@@ -46,7 +47,7 @@ class DoctrineSupportServiceProvider extends ServiceProvider
     {
         $name = $connection->getDriverName();
 
-        foreach (array_get($this->types, $name, []) as $type => $handler) {
+        foreach (Arr::get($this->types, $name, []) as $type => $handler) {
             if (!Type::hasType($type)) {
                 Type::addType($type, $handler);
             }
